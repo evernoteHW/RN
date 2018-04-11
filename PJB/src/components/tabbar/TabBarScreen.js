@@ -16,13 +16,11 @@ const HomeNavigationStack = StackNavigator(
   	navigationOptions: ({ navigation }) => ({
   		tabBarLabel: '首页',
   		tabBarIcon: ({ focused, tintColor }) => {
-		    var iconName = focused ? require('../../resources/images/tabbar/tabbar_index_selected.png') : require('../../resources/images/tabbar/tabbar_index_default.png')
+		    var iconName = focused 
+		    ? require('../../resources/images/tabbar/tabbar_index_selected.png') 
+		    : require('../../resources/images/tabbar/tabbar_index_default.png')
 		    return (<View> 
-	        			<Image
-    						source = {iconName}
-    						style = {styles.tabBarIcon}
-
-  						/>
+	        			<Image source = {iconName} style = {styles.tabBarIcon} />
 	        		</View>);
 		    },
   	})
@@ -36,13 +34,11 @@ const ProductsNavigationStack = StackNavigator(
   	navigationOptions: ({ navigation }) => ({
   		tabBarLabel: '产品',
   		tabBarIcon: ({ focused, tintColor }) => {
-		    var iconName = focused ? require('../../resources/images/tabbar/tabbar_index_selected.png') : require('../../resources/images/tabbar/tabbar_index_default.png')
-		    return (<View> 
-	        			<Image
-    						source = {iconName}
-    						style = {styles.tabBarIcon}
-    						
-  						/>
+		    var iconName = focused 
+		    ? require('../../resources/images/tabbar/tabbar_list_default.png') 
+		    : require('../../resources/images/tabbar/tabbar_list_selected.png')
+		    return (<View>  
+		    			<Image source = {iconName} style = {styles.tabBarIcon} />
 	        		</View>);
 		    },
   	})
@@ -56,13 +52,11 @@ const MineNavigationStack = StackNavigator(
   	navigationOptions: ({ navigation }) => ({
   		tabBarLabel: '我的',
   		tabBarIcon: ({ focused, tintColor }) => {
-		    var iconName = focused ? require('../../resources/images/tabbar/tabbar_index_selected.png') : require('../../resources/images/tabbar/tabbar_index_default.png')
+		    var iconName = focused 
+		    ? require('../../resources/images/tabbar/tabbar_mine_default.png') 
+		    : require('../../resources/images/tabbar/tabbar_mine_selected.png')
 		    return (<View> 
-	        			<Image
-    						source = {iconName}
-    						style = {styles.tabBarIcon}
-    						
-  						/>
+	        			<Image source = {iconName} style = {styles.tabBarIcon}/>
 	        		</View>);
 		    },
   	})
