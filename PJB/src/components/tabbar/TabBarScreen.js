@@ -21,6 +21,7 @@ const HomeNavigationStack = StackNavigator(
 	        			<Image
     						source = {iconName}
     						style = {styles.tabBarIcon}
+
   						/>
 	        		</View>);
 		    },
@@ -33,7 +34,17 @@ const ProductsNavigationStack = StackNavigator(
   },
   {
   	navigationOptions: ({ navigation }) => ({
-  		title: '产品'
+  		tabBarLabel: '产品',
+  		tabBarIcon: ({ focused, tintColor }) => {
+		    var iconName = focused ? require('../../resources/images/tabbar/tabbar_index_selected.png') : require('../../resources/images/tabbar/tabbar_index_default.png')
+		    return (<View> 
+	        			<Image
+    						source = {iconName}
+    						style = {styles.tabBarIcon}
+    						
+  						/>
+	        		</View>);
+		    },
   	})
   }
 );
@@ -43,7 +54,17 @@ const MineNavigationStack = StackNavigator(
   },
   {
   	navigationOptions: ({ navigation }) => ({
-  		title: '我的'
+  		tabBarLabel: '我的',
+  		tabBarIcon: ({ focused, tintColor }) => {
+		    var iconName = focused ? require('../../resources/images/tabbar/tabbar_index_selected.png') : require('../../resources/images/tabbar/tabbar_index_default.png')
+		    return (<View> 
+	        			<Image
+    						source = {iconName}
+    						style = {styles.tabBarIcon}
+    						
+  						/>
+	        		</View>);
+		    },
   	})
   }
 );
