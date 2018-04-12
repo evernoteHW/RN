@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   View, 
   Text, 
-  Button, 
+  TouchableHighlight, 
   ScrollView, 
   StyleSheet,
   Image
@@ -10,6 +10,8 @@ import {
 import { StackNavigator } from 'react-navigation';
 import Swiper from 'react-native-swiper';
 import api from '../../network/api';
+
+import { scare } from '../../uiutils/Dimensions'
 
 const productIcon = require('../../resources/images/home/home_top_hot_recommond_icon.png')
 
@@ -173,12 +175,14 @@ export default class HomeScreen extends React.Component {
                   <Text style={styles.productAssignTip}>锁定期</Text>
                 </View>
               </View>
-              <View>
-                <Button title={'立即出借'} 
-                          onPress={()=>{
-                              alert(1)
-                          }}> 
-                </Button>
+              <View style={styles.productBottomWrapper}>
+                <TouchableHighlight
+                    style={styles.productBuyButton}
+                    onPress={()=>{
+                      alert(1)
+                    }}> 
+                        <Text>立即出借</Text>
+                </TouchableHighlight>
             </View>
           </View>
           : null  
@@ -194,7 +198,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'orange'
   },
   topBannerWrapper: {
-    height: 375.0/2.0
+    height: scare(375.0/2.0)
   },
   topBannerItem: {
     flex: 1,
@@ -211,7 +215,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexGrow: 1, // 平分
-    height: 169.0/2.0
+    height: scare(169.0/2.0)
   },
   toppicItem: {
     flex: 1,
@@ -219,7 +223,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   monthReportWrapper: {
-    height: 58.0/2.0,
+    height: scare(58.0/2.0),
     flexDirection: 'row',
   },
   monthReportCurrent: {
@@ -228,18 +232,18 @@ const styles = StyleSheet.create({
   },
   monthReportMore: {
     // flex: 1,
-    width: 170.0/2.0,
+    width: scare(170.0/2.0),
     backgroundColor: 'green',
   },
   newCommerWrapper: {
-    height: 139.0/2.0
+    height: scare(139.0/2.0)
   },
   newCommerItem: {
     flex: 1,
     backgroundColor: 'gray',
   },
   noticeWrapper: {
-    height: 45.0/2.0,
+    height: scare(45.0/2.0),
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#cccccc'
@@ -249,7 +253,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   productWrapper: {
-    height: 451.0/2.0,
+    height: scare(451.0/2.0),
     backgroundColor: 'gray'
   },
   productTopWrapper: {
@@ -257,18 +261,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    height: 50,
+    height: scare(50.0),
   },
   productCenterWrapper: {
-    flex: 1,
-    height: 150,
+    // flex: 1,
+    height: scare(105.0),
     flexDirection: 'row',
     backgroundColor: 'green',
-    marginBottom: 1
+    // marginBottom: 1
     // flexGrow: 1,
   },
   productCenterItem: {
     flex: 1,
+    backgroundColor: 'yellow',
     // width: '50%',
     
   },
@@ -276,9 +281,9 @@ const styles = StyleSheet.create({
     // flex: 1,
     justifyContent: 'center',
     // alignItems: 'center',
-    height: 50,
+    height: scare(50.0),
     width: '100%',
-    // backgroundColor: 'orange'
+    backgroundColor: 'blue'
   },
   productSubTitle: {
     marginLeft: 17.5
@@ -286,15 +291,30 @@ const styles = StyleSheet.create({
   productIntrRate: {
     color: '#e94e4e',
     fontSize: 17.5,
-    marginLeft: 17.5
+    marginLeft: 17.5,
+    backgroundColor: 'gray'
   },
   productPercentTip: {
     marginLeft: 17.5,
-    marginTop: 11
+    marginTop: 11,
+    backgroundColor: 'green'
   },
   productAssignTip: {
     marginTop: 11,
     backgroundColor: 'red',
+  },
+  productBottomWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  productBuyButton:{
+    // flex: 1,
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#123456',
   },
   productIcon: {
     width: 52/2.0,
