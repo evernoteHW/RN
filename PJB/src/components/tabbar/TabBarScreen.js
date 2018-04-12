@@ -35,8 +35,8 @@ const ProductsNavigationStack = StackNavigator(
   		tabBarLabel: '产品',
   		tabBarIcon: ({ focused, tintColor }) => {
 		    var iconName = focused 
-		    ? require('../../resources/images/tabbar/tabbar_list_default.png') 
-		    : require('../../resources/images/tabbar/tabbar_list_selected.png')
+		    ? require('../../resources/images/tabbar/tabbar_list_selected.png') 
+		    : require('../../resources/images/tabbar/tabbar_list_default.png')
 		    return (<View>  
 		    			<Image source = {iconName} style = {styles.tabBarIcon} />
 	        		</View>);
@@ -53,8 +53,8 @@ const MineNavigationStack = StackNavigator(
   		tabBarLabel: '我的',
   		tabBarIcon: ({ focused, tintColor }) => {
 		    var iconName = focused 
-		    ? require('../../resources/images/tabbar/tabbar_mine_default.png') 
-		    : require('../../resources/images/tabbar/tabbar_mine_selected.png')
+		    ? require('../../resources/images/tabbar/tabbar_mine_selected.png') 
+		    : require('../../resources/images/tabbar/tabbar_mine_default.png')
 		    return (<View> 
 	        			<Image source = {iconName} style = {styles.tabBarIcon}/>
 	        		</View>);
@@ -70,50 +70,9 @@ export default TabNavigator (
 		Mine: { screen: MineNavigationStack}
 	},
 	{
-		navigationOptions: ({ navigation }) => ({
-			// tabBarLabel: ({ focused, tintColor }) => {
-			// 	const { routeName } = navigation.state;
-			// return  (
-			// 			<View> 
-			// 				<Text> {routeName} </Text>
-			// 			</View>
-			// 		)
-			// },
-      // 		tabBarIcon: ({ focused, tintColor }) => {
-      			
-		    //     const { routeName } = navigation.state;
-		    //     console.log(routeName, '===', focused)
-		    //     var iconName;
-		    //     switch (iconName) {
-		    //     	case 'Home':
-		    //     	{
-						// iconName = focused ? require('../../resources/images/tabbar/tabbar_index_selected.png') : require('../../resources/images/tabbar/tabbar_index_default.png')
-		    //     	}
-		    //     	default: {
-		    //     		break;
-		    //     		// iconName = focused ? require('../../resources/images/tabbar/tabbar_list_default.png') : require('../../resources/images/tabbar/tabbar_list_selected.png')
-		    //     	}
-		    //     }
-		    // //     if (routeName === 'Home') {
-		    // //       iconName = focused ? require('../../resources/images/tabbar/tabbar_index_selected.png') : require('../../resources/images/tabbar/tabbar_index_default.png')
-		    // //     } else if (routeName === 'Products') {
-		    // //       iconName = focused ? require('../../resources/images/tabbar/tabbar_list_default.png') : require('../../resources/images/tabbar/tabbar_list_selected.png')
-		    // //     } else {
-				  // // iconName = focused ? require('../../resources/images/tabbar/tabbar_mine_default.png') : require('../../resources/images/tabbar/tabbar_mine_selected.png')
-		    // //     }
-				
-		    //     // You can return any component that you like here! We usually use an
-		    //     // icon component from react-native-vector-icons
-		    //     return (<View> 
-		    //     			<Image
-      //   						source = {iconName}
-      //   						style = {styles.tabBarIcon}
-      // 						/>
-		    //     		</View>);
-		    // },
-	    }),
+		navigationOptions: ({ navigation }) => ({}),
 	    tabBarOptions: {
-	      activeTintColor: 'tomato',
+	      activeTintColor: '#e94d4e',
 	      inactiveTintColor: 'gray',
 	      labelStyle: {
 
