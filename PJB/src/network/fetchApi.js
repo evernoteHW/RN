@@ -1,17 +1,23 @@
 
 import api from './api'
-const BASE_API_URL = 'http://218.17.157.55:8086/'
+const BASE_API_URL = 'http://192.168.1.188:8084/'
+// const BASE_API_URL = 'http://192.168.1.190:8084/'
+// const BASE_API_URL = 'http://218.17.157.55:8086/'
+// const BASE_API_URL = 'http://218.17.157.55:8084/'
+// const BASE_API_URL = 'https://scf.pj.com/'
+// 
+const headers = {
+    				'Content-Type': 'application/json',
+    				'clientType': '4',
+    				'referral': '',
+    				'appVersion': '6.0.0'
+             	}
 
 export function fetchApi(url, params){
 	return new Promise((resolve, reject) => {
 		fetch(BASE_API_URL + url, {
              method: 'POST',
-             headers: {
-        				'Content-Type': 'application/json',
-        				'clientType': '4',
-        				'referral': '',
-        				'appVersion': '6.0.0'
-             },
+             headers: headers,
         })
         .then(response => response.json())
         .then((json) => {

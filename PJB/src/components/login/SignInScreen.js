@@ -7,7 +7,7 @@ import {
 
 export default class SignInScreen extends React.Component {
     static navigationOptions = {
-      // header: { visible: false }, // !!! Hide Header,
+      header: (<Text style={{backgroundColor: 'orange'}}> 12312312312312312312312</Text>), // !!! Hide Header,
       title: '1111'
     }
   	render() {

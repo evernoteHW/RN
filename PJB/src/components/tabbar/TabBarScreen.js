@@ -14,6 +14,8 @@ const HomeNavigationStack = StackNavigator(
   },
   {
   	navigationOptions: ({ navigation }) => ({
+  		title: '首页',
+  		headerTintColor: 'white',
   		tabBarLabel: '首页',
   		tabBarIcon: ({ focused, tintColor }) => {
 		    var iconName = focused 
@@ -32,7 +34,10 @@ const ProductsNavigationStack = StackNavigator(
   },
   {
   	navigationOptions: ({ navigation }) => ({
+  		title: '票据贷',
   		tabBarLabel: '产品',
+  		headerTintColor: 'white',
+  		headerStyle: {backgroundColor: '#e94d4e'},
   		tabBarIcon: ({ focused, tintColor }) => {
 		    var iconName = focused 
 		    ? require('../../resources/images/tabbar/tabbar_list_selected.png') 

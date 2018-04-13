@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   View, 
   Text, 
-  TouchableHighlight, 
+  TouchableOpacity, 
   ScrollView, 
   StyleSheet,
   Image
@@ -10,14 +10,31 @@ import {
 import { StackNavigator } from 'react-navigation';
 import Swiper from 'react-native-swiper';
 import api from '../../network/api';
-
-import { scare } from '../../uiutils/Dimensions'
+import styles from './styles'
+import { scare, deviceWidth, max, min } from '../../uiutils/Dimensions'
 
 const productIcon = require('../../resources/images/home/home_top_hot_recommond_icon.png')
+const headerLeftIcon = require('../../resources/images/home/home_left_item_white_icon.png')
+const headerRightIcon = require('../../resources/images/home/home_right_item_white_icon.png')
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
-      return { header: null };
+      const params = navigation.state.params || {};
+      const { headerColor } = params
+      return { 
+        headerTransparent: true, 
+        headerStyle: {backgroundColor: headerColor, opacity: 1.0, borderBottomWidth:0,},
+        headerLeft:(
+                    <TouchableOpacity style={styles.headerLeftWrapper} onPress={()=>navigation.navigate('Login')}>
+                      <Image style={styles.headerLeftIcon} source={headerLeftIcon} overflow='visible'/>
+                    </TouchableOpacity>
+                  ),
+        headerRight:(
+                    <TouchableOpacity style={styles.headerRightWrapper}>
+                      <Image style={styles.headerRightIcon} source={headerRightIcon} overflow='visible'/>
+                    </TouchableOpacity>
+                  )
+      };
   };
   constructor(props) {
     super(props);
@@ -30,9 +47,17 @@ export default class HomeScreen extends React.Component {
       speciallyRecommend: null
     };
   };
+  componentWillMount() {
+    // console.log(navigation)
+     
+  }
   componentDidMount () {
     this.appIndexPage()
     // alert(fetchApi)
+  }
+  _changeHeaderColor = (alpha=0.0)=> {
+    const rgba = 'rgba(233,77,78,' + alpha + ')'
+    this.props.navigation.setParams({ headerColor: rgba });
   }
   appIndexPage() {
     api.appIndexPage().then(res => {
@@ -79,21 +104,51 @@ export default class HomeScreen extends React.Component {
       alert(error)
     })
   }
+  //
+  _onScroll = (e) => {
+    const { contentOffset } = e.nativeEvent
+    if (contentOffset.y>5){
+      var alpha = min(80, contentOffset.y)/80.0
+      this._changeHeaderColor(alpha)
+    } else {
+      this._changeHeaderColor(0.0)
+    }
+  }
+  // 轮播图
+  bannerClock = (item) => {
+    // alert(item)
+    
+  }
+  // 三个介绍位
+  topTopicClick = (item) => {
+    alert(item)
+  }
+  // 购买
+  gotoBuyProduct = id => {
+    alert(1)
+  }
   render() {
     // 解构赋值
     const { topBannerList, topTopics, monthReport, newComerActivity, announcement, speciallyRecommend } = this.state;
     return (
-      <ScrollView style = {styles.contentContainer}>
+      <ScrollView style = {styles.contentContainer} onScroll={this._onScroll} scrollEventThrottle={200}>
         {/*轮播图*/}
         {
           topBannerList.length > 0 
-          ? <Swiper style={styles.topBannerWrapper} autoplay={topBannerList.length>0}>
+          ? <Swiper style={styles.topBannerWrapper} 
+                    autoplay={topBannerList.length>0}
+                    // dot={ <View style={styles.dotStyle} />}
+                    dotColor={'#f1eeea'}
+                    activeDotColor={'#e94d4e'}
+                    // dotStyle={{marginTop: 40}}
+                    // activeDotStyle={{marginTop: 40}}
+            >
             {
               topBannerList.map((item, idx) => {
                 return (
-                    <View style={styles.slide} key={idx}>
-                      <Image style={styles.topBannerItem} source={{uri: item.pictureImgUrl}}/>
-                    </View>
+                    <TouchableOpacity style={styles.slide} key={idx} activeOpacity={1.0} onPress={(item) => this.bannerClock(idx)}>
+                        <Image style={styles.topBannerItem} source={{uri: item.pictureImgUrl}} />
+                    </TouchableOpacity>
                 )
               })
             }
@@ -104,13 +159,13 @@ export default class HomeScreen extends React.Component {
         {/*广告Tab*/}
         {
           topTopics.length > 0 
-          ? <View style={styles.topTopicWrapper}>
+          ? <View style={styles.topTopicWrapper} >
             {
               topTopics.map((item, idx) => {
               return (
-                  <View style={styles.toppicItem} key={idx}>
+                  <TouchableOpacity style={styles.toppicItem} key={idx} onPress={()=>this.topTopicClick(idx)}> 
                     <Image style={styles.topBannerItem} source={{uri: item.topicImgUrl}}/>
-                  </View>
+                  </TouchableOpacity>
               )
             })
             }
@@ -160,29 +215,36 @@ export default class HomeScreen extends React.Component {
                 <Image source={productIcon} style={styles.productIcon}/>
                 <Text style={styles.productTitle}>热门产品推荐</Text>
               </View>
+              <View style={styles.separatorLine}></View>
               <View style={styles.productCenterWrapper}>
-                <View style={styles.productCenterItem}> 
                   <View style={styles.productSubTitleWrapper}>
                     <Text style={styles.productSubTitle}>{speciallyRecommend.planTitle}</Text>
                   </View>
-                  <Text style={styles.productIntrRate}>{speciallyRecommend.intrRate}</Text>
-                  <Text style={styles.productPercentTip}>年利率</Text>
-                </View>
-                <View style={styles.productCenterItem}> 
                   <View style={styles.productSubTitleWrapper}>
                   </View>
-                  <Text>{speciallyRecommend.assignDays}天</Text>
-                  <Text style={styles.productAssignTip}>锁定期</Text>
-                </View>
               </View>
+              
+              <View style={styles.productItemWrapper}>
+                <View style={styles.productCenterItem}> 
+                    <Text style={styles.productIntrRate}>{speciallyRecommend.intrRate}%</Text>
+                    <Text style={styles.productAssignDays}>{speciallyRecommend.assignDays}天</Text>
+                </View>
+              </View> 
+              <View style={styles.productItemWrapper}>
+                <View style={styles.productCenterItem}> 
+                    <Text style={styles.productPercentTip}>年利率</Text>
+                    <Text style={styles.productAssignTip}>锁定期</Text>
+                </View>
+              </View> 
+              <View style={styles.separatorLineCenter}></View>
+    
               <View style={styles.productBottomWrapper}>
-                <TouchableHighlight
+                <TouchableOpacity
                     style={styles.productBuyButton}
-                    onPress={()=>{
-                      alert(1)
-                    }}> 
-                        <Text>立即出借</Text>
-                </TouchableHighlight>
+                    activeOpacity={0.8}
+                    onPress={this.gotoBuyProduct}> 
+                  <Text style={styles.productBuyText}>立即出借</Text>
+                </TouchableOpacity>
             </View>
           </View>
           : null  
@@ -192,138 +254,3 @@ export default class HomeScreen extends React.Component {
     );
   }
 };
-
-const styles = StyleSheet.create({
-  contentContainer: {
-    backgroundColor: 'orange'
-  },
-  topBannerWrapper: {
-    height: scare(375.0/2.0)
-  },
-  topBannerItem: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-  },
-  slide: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#9DD6EB',
-  },
-  topTopicWrapper: {
-    flex: 1,
-    flexDirection: 'row',
-    flexGrow: 1, // 平分
-    height: scare(169.0/2.0)
-  },
-  toppicItem: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-  },
-  monthReportWrapper: {
-    height: scare(58.0/2.0),
-    flexDirection: 'row',
-  },
-  monthReportCurrent: {
-    flex: 1,
-    backgroundColor: 'gray',
-  },
-  monthReportMore: {
-    // flex: 1,
-    width: scare(170.0/2.0),
-    backgroundColor: 'green',
-  },
-  newCommerWrapper: {
-    height: scare(139.0/2.0)
-  },
-  newCommerItem: {
-    flex: 1,
-    backgroundColor: 'gray',
-  },
-  noticeWrapper: {
-    height: scare(45.0/2.0),
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#cccccc'
-  },
-  noticeText: {
-    fontSize: 12,
-    color: 'white',
-  },
-  productWrapper: {
-    height: scare(451.0/2.0),
-    backgroundColor: 'gray'
-  },
-  productTopWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    height: scare(50.0),
-  },
-  productCenterWrapper: {
-    // flex: 1,
-    height: scare(105.0),
-    flexDirection: 'row',
-    backgroundColor: 'green',
-    // marginBottom: 1
-    // flexGrow: 1,
-  },
-  productCenterItem: {
-    flex: 1,
-    backgroundColor: 'yellow',
-    // width: '50%',
-    
-  },
-  productSubTitleWrapper: {
-    // flex: 1,
-    justifyContent: 'center',
-    // alignItems: 'center',
-    height: scare(50.0),
-    width: '100%',
-    backgroundColor: 'blue'
-  },
-  productSubTitle: {
-    marginLeft: 17.5
-  },
-  productIntrRate: {
-    color: '#e94e4e',
-    fontSize: 17.5,
-    marginLeft: 17.5,
-    backgroundColor: 'gray'
-  },
-  productPercentTip: {
-    marginLeft: 17.5,
-    marginTop: 11,
-    backgroundColor: 'green'
-  },
-  productAssignTip: {
-    marginTop: 11,
-    backgroundColor: 'red',
-  },
-  productBottomWrapper: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  productBuyButton:{
-    // flex: 1,
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#123456',
-  },
-  productIcon: {
-    width: 52/2.0,
-    height: 48/2.0
-  },
-  productTitle: {
-    marginTop: 4,
-    marginLeft: 7.5,
-    color: '#6d6261',
-    fontSize: 15
-  },
-});

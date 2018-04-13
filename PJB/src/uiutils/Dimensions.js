@@ -10,3 +10,10 @@ export function scare(height) {
 }
 
 export const mainColor = "#e94d4e"
+
+export function max(lhd, rhd) {
+	return lhd >= rhd ? lhd : rhd
+}
+export function min(lhd, rhd) {
+	return lhd <= rhd ? lhd : rhd
+}
