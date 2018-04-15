@@ -1,26 +1,44 @@
 import * as TYPES from '../actions/types'
+import { combineReducers } from 'redux'
 
 const initialState = {
 	isLogin: false,
 	user: {},
-	status: null
+	loginStatus: null
 }
 
-export default function user(state=initialState, action){
+const dataReducer = (state=initialState, action) =>{
 	switch (action.type) {
-		case PJB_LOGIN_BEGGING:
+		case TYPES.PJB_LOGIN_BEGGING:
 		{
 			return {
 				...state,
-				status: 'begging'
+				loginStatus: 'begging'
 			}	
 		}
-		case PJB_LOGIN_SUCCEED:
+		case TYPES.PJB_LOGIN_SUCCEED:
 		{
 			return {
 				...state,
-				status: 'complete'
+				loginStatus: 'completed'
 			}	
 		}
+		case TYPES.PJB_LOGIN_FAILED:
+		{
+			return {
+				...state,
+				loginStatus: 'failed'
+			}	
+		}
+		default:
+			return state
 	}	
 }
+
+const rootReducer = combineReducers({
+    dataReducer
+    // ,[ANOTHER REDUCER], [ANOTHER REDUCER] ....
+})
+ 
+
+export default rootReducer;

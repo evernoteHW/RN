@@ -9,6 +9,12 @@ import {
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Swiper from 'react-native-swiper';
+
+// redux
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import * as loginActions from '../../redux/actions/loginActions'
+
 import api from '../../network/api';
 import styles from './styles'
 import { scare, deviceWidth, max, min } from '../../uiutils/Dimensions'
@@ -17,7 +23,7 @@ const productIcon = require('../../resources/images/home/home_top_hot_recommond_
 const headerLeftIcon = require('../../resources/images/home/home_left_item_white_icon.png')
 const headerRightIcon = require('../../resources/images/home/home_right_item_white_icon.png')
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
       const params = navigation.state.params || {};
       const { headerColor } = params
@@ -49,10 +55,18 @@ export default class HomeScreen extends React.Component {
   };
   componentWillMount() {
     // console.log(navigation)
-     
+    // this.props.navigation.navigate('Login')
   }
   componentDidMount () {
+    // this.props.navigation.goBack()
+    // console.log('1====', this.props)
     this.appIndexPage()
+    // setTimeout(()=>{
+    //   // console.log('2====', this.props)
+    //   // dispatch({'type': TYPES.PJB_LOGIN_SUCCEED, data: data})
+    //   alert(333)
+    //   this.props.navigation.goBack()
+    // }, 4000);
     // alert(fetchApi)
   }
   _changeHeaderColor = (alpha=0.0)=> {
@@ -99,7 +113,7 @@ export default class HomeScreen extends React.Component {
         announcement: announcement,
         speciallyRecommend: speciallyRecommend
       })
-      console.log('count---',res)
+      // console.log('count---',res)
     }).catch (error => {
       alert(error)
     })
@@ -122,6 +136,7 @@ export default class HomeScreen extends React.Component {
   // 三个介绍位
   topTopicClick = (item) => {
     alert(item)
+    this.props.navigation.navigate('Login')
   }
   // 购买
   gotoBuyProduct = id => {
@@ -237,7 +252,6 @@ export default class HomeScreen extends React.Component {
                 </View>
               </View> 
               <View style={styles.separatorLineCenter}></View>
-    
               <View style={styles.productBottomWrapper}>
                 <TouchableOpacity
                     style={styles.productBuyButton}
@@ -254,3 +268,17 @@ export default class HomeScreen extends React.Component {
     );
   }
 };
+
+function mapStateToProps(state, props) {
+    return {
+        loading: state.dataReducer.loading,
+        data: state.dataReducer.data
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(loginActions, dispatch);
+}
+
+//Connect everything
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

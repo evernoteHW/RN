@@ -5,9 +5,24 @@ import {
   StatusBar,
   StyleSheet,
   View,
+  Text,
+  TouchableOpacity
 } from 'react-native';
 
 export default class AuthLoadingScreen extends React.Component {
+  //  static navigationOptions = ({ navigation }) => {
+  //     const params = navigation.state.params || {};
+  //     const { headerColor } = params
+  //     return { 
+  //       // headerTransparent: true, 
+  //       // headerStyle: {backgroundColor: headerColor, opacity: 1.0, borderBottomWidth:0,},
+  //       headerLeft:(
+  //                   <TouchableOpacity onPress={()=>navigation.goBack(null)}>
+  //                     <Text> 123123</Text>
+  //                   </TouchableOpacity>
+  //                 )
+  //     };
+  // };
   constructor(props) {
     super(props);
     this._bootstrapAsync();

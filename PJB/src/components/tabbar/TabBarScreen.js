@@ -83,7 +83,17 @@ export default TabNavigator (
 
 	      }
 	    },
-	    tabBarComponent: TabBarBottom,
+	    tabBarComponent:  ({jumpToIndex, ...props, navigation}) => {
+	    	return <TabBarBottom {...props}
+	    				jumpToIndex={index => {
+	    					if (index == 2) {
+								navigation.navigate('Login')
+	    					} else {
+	    						jumpToIndex(index)
+	    					}
+	    				}}
+	    		   />
+	    },
 	    tabBarPosition: 'bottom',
 	    animationEnabled: false,
 	    swipeEnabled: false,

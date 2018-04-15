@@ -1,10 +1,10 @@
 
 import api from './api'
-const BASE_API_URL = 'http://192.168.1.188:8084/'
+// const BASE_API_URL = 'http://192.168.1.188:8084/'
 // const BASE_API_URL = 'http://192.168.1.190:8084/'
 // const BASE_API_URL = 'http://218.17.157.55:8086/'
 // const BASE_API_URL = 'http://218.17.157.55:8084/'
-// const BASE_API_URL = 'https://scf.pj.com/'
+const BASE_API_URL = 'https://scf.pj.com/'
 // 
 const headers = {
     				'Content-Type': 'application/json',

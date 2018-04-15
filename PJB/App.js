@@ -3,14 +3,18 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-
-import Router from './src/router';
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+
+import RootStack from './src/router';
+import store from './src/redux/store'
 
 export default class App extends Component<Props> {
   render() {
     return (
-      <Router />
+    	<Provider store={store}>
+      		<RootStack />
+      	</Provider>	
     );
   }
 }
