@@ -8,25 +8,22 @@ export const bannerLoginPageOfBannerDetailOfAppReducer = (state=initialState, ac
 	switch (action.type) {
 		case TYPES.PJB_BANNER_LOGIN_PAGE_OF_BANNER_DETAIL_OF_APP_BEGGING:
 		{
-			return {
-				...state,
-				status: 'begging'
-			}	
+			return Object.assign({}, state)	
 		}
 		case TYPES.PJB_BANNER_LOGIN_PAGE_OF_BANNER_DETAIL_OF_APP_SUCCEED:
 		{
-			return {
+			return Object.assign({}, {
 				...state,
 				status: 'completed',
 				headerDic: action.response
-			}	
+			})	
 		}
 		case TYPES.PJB_BANNER_LOGIN_PAGE_OF_BANNER_DETAIL_OF_APP_FAILED:
 		{
-			return {
+			return Object.assign({}, {
 				...state,
 				status: 'failed'
-			}	
+			})	
 		}
 		default:
 			return state

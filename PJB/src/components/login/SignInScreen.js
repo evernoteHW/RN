@@ -13,16 +13,14 @@ import {
 // redux
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-// import * as loginActions from '../../redux/actions/loginActions'
-// import actions from '../../redux/actions'
-import * as activityActions from '../../redux/actions/activityActions'
+import actions from '../../redux/actions'
+
+import CustomButton from '../commonComponents/customButton'
 
 const userNameIcon = require('../../resources/images/login/login_username_icon.png')
 const pwdIcon = require('../../resources/images/login/login_pwd_icon.png')
 const imageCodeIcon = require('../../resources/images/login/login_image_code_icon.png')
 
-// login_image_code_icon@2x.png
-// login_image_code_icon@3x.png
 class SignInScreen extends React.Component {
     // static navigationOptions = {
     //   header: (<Text style={{backgroundColor: 'orange'}}> 12312312312312312312312</Text>), // !!! Hide Header,
@@ -65,18 +63,23 @@ class SignInScreen extends React.Component {
               <View style={styles.marginRight} />
             </View>
             <View style={styles.separatorLine}></View>
-            <TouchableOpacity style={styles.loginButton} activeOpacity={0.8} onPress={()=> this._loginButton()}>
-              <Text style={styles.buttonText}>登录</Text>
-            </TouchableOpacity>
-            <TouchableOpacity >
-              <Text>忘记密码</Text>
-            </TouchableOpacity>
-            <TouchableOpacity >
-              <Text>立即注册</Text>
-            </TouchableOpacity>
-            <TouchableOpacity >
+            <CustomButton
+              style={styles.loginButton} 
+              buttonTitle='登录'
+              onPress={this.onPress}
+            />
+            <View style={styles.registerForgetPwdWrapper}>
+              <TouchableOpacity>
+                <Text style={styles.forgetPwd}>忘记密码</Text>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Text  style={styles.register}>立即注册</Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity style={styles.telPhone}>
               <Text>客服电话：400-188-9138</Text>
             </TouchableOpacity>
+
       		</ScrollView>
     );
   }
@@ -90,7 +93,7 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators(activityActions, dispatch);
+    return bindActionCreators(actions.activityActions, dispatch);
 }
 
 //Connect everything
@@ -137,14 +140,28 @@ const styles = StyleSheet.create({
   loginButton: {
     marginLeft: 17.5,
     marginRight: 17.5,
+    marginTop: 20,
     height: 35,
     borderRadius: 6,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#e94d4e',
+    marginBottom: 20
   },
-  buttonText: {
-    color: 'white'
+  registerForgetPwdWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  register: {
+    color: '#6d6261'
+  },
+  forgetPwd: {
+    marginRight: 30,
+    color: '#6d6261'
+  },
+  telPhone: {
+    alignSelf: 'flex-end'
   },
   separatorLine: {
     height: 1,

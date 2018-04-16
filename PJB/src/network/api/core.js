@@ -5,6 +5,6 @@ export function appIndexPage () {
   return fetchApi(`${perfix}/appFront/v1.0/appIndexPage`, {}, {headers: {'clientType': '4', 'referral': ''}})
 }
 
-export function productList (params) {
+export const productList = params => {
   return fetchApi(`${perfix}/appFront/planProduct/planProductList`, params)
 }

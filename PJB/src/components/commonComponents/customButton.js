@@ -15,7 +15,7 @@ const CustomButton = (props) => {
 }
 const styles = StyleSheet.create({
 	buttonWrapper: {
-		width: 100,
+		width: 80,
 	  	alignItems: 'center', 
 		justifyContent: 'center',
 		backgroundColor: '#e94d4e',

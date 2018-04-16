@@ -11,7 +11,6 @@ export const appIndexPage = (userName: '', password: '', imageCode: '') => {
 		 	api.appIndexPage().then(res => {
       			dispatch({'type': TYPES.PJB_LOGIN_SUCCEED, data: data})
     		}).catch (error => {
-      		alert(error)
       			dispatch({type: TYPES.PJB_LOGIN_FAILED})
     		})
     	}
