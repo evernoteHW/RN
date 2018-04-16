@@ -27,8 +27,8 @@ class SignInScreen extends React.Component {
       // this._dismiss = this._dismiss.bind(this)
     }
     _loginButton = ()=>{
-      const { login }  = this.props
-      login()
+      const { appIndexPage }  = this.props
+      appIndexPage()
       // console.log(this.props)
       // this.props.navigation.goBack(null)
       // this.props.navigation.navigate('AuthLoadingScreen')
@@ -79,8 +79,8 @@ class SignInScreen extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        loginStatus: state.dataReducer.loginStatus,
-        data: state.dataReducer.data
+        loginStatus: state.appIndexPageReducer.loginStatus,
+        data: state.appIndexPageReducer.data
     }
 }
 

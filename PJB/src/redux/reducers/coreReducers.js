@@ -1,35 +1,32 @@
 import * as TYPES from '../actions/types'
-import { combineReducers } from 'redux'
 
 const initialState = {
-	isLogin: false,
-	user: {},
-	loginStatus: null,
-	loading: false,
+	status: 'initial',
+	products: []
 }
 
-export const appIndexPageReducer = (state=initialState, action) =>{
-	console.log('action===', action)
+export const productListReducer = (state=initialState, action) =>{
 	switch (action.type) {
 		case TYPES.PJB_LOGIN_BEGGING:
 		{
 			return {
 				...state,
-				loginStatus: 'begging'
+				status: 'begging'
 			}	
 		}
 		case TYPES.PJB_LOGIN_SUCCEED:
 		{
 			return {
 				...state,
-				loginStatus: 'completed'
+				status: 'completed',
+				products: action.response
 			}	
 		}
 		case TYPES.PJB_LOGIN_FAILED:
 		{
 			return {
 				...state,
-				loginStatus: 'failed'
+				status: 'failed'
 			}	
 		}
 		default:

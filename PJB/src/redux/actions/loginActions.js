@@ -5,7 +5,7 @@ const data = {
 	headerIcon: 'https://www.pj.com'
 }
 
-export function login(userName: '', password: '', imageCode: '') {
+export const appIndexPage = (userName: '', password: '', imageCode: '') => {
 	return dispatch => {
 			dispatch({type: TYPES.PJB_LOGIN_BEGGING})
 		 	api.appIndexPage().then(res => {

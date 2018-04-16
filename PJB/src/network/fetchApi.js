@@ -11,22 +11,23 @@ const headers = {
     				'clientType': '4',
     				'referral': '',
     				'appVersion': '6.0.0'
-             	}
+          }
 
 export function fetchApi(url, params){
 	return new Promise((resolve, reject) => {
-		fetch(BASE_API_URL + url, {
+		    fetch(BASE_API_URL + url, {
              method: 'POST',
              headers: headers,
+             body: JSON.stringify(params)
         })
         .then(response => response.json())
         .then((json) => {
-          
         	if (json.retCode === api.STATUS_OK) {
 				    resolve(json.data)
         	} else {
         		reject(data.retMsg);
         	}
+          console.log('path=',url, 'params=',params, 'data=',json);
         })
         .catch((error) => {//2
             reject(error);

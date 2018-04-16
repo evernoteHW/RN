@@ -11,7 +11,7 @@ import { StackNavigator } from 'react-navigation';
 import Swiper from 'react-native-swiper';
 
 // redux
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as loginActions from '../../redux/actions/loginActions'
 
@@ -271,8 +271,8 @@ class HomeScreen extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        loading: state.dataReducer.loading,
-        data: state.dataReducer.data
+        loading: state.appIndexPageReducer.loading,
+        data: state.appIndexPageReducer.data
     }
 }
 
