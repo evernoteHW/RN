@@ -24,6 +24,7 @@ const SignInNavigationStack = StackNavigator(
       headerBackTitle: '',
       headerTintColor: 'white',
       headerStyle: {backgroundColor: '#e94d4e', borderBottomWidth: 0},
+      statusBarStyle: 'light-content'
       // headerBackImage: (require('../resources/images/home/home_left_item_white_icon.png'))
     })
   }

@@ -17,9 +17,7 @@ class ProductsScreen extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    // this.state = {
-    // 	products: [{'key': 'a'}, {'key': 'b'}]
-    // };
+   
   }
   _keyExtractor = (item, index) => index
   componentDidMount() {
@@ -83,8 +81,7 @@ const styles = StyleSheet.create({
 		flex: 1, 
 		alignItems: 'center', 
 		justifyContent: 'center', 
-		backgroundColor: 
-		'orange'
+		backgroundColor: 'orange'
 	},
 	flatListItem: {
 		backgroundColor: 'white'

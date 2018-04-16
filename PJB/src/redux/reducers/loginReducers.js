@@ -1,5 +1,4 @@
 import * as TYPES from '../actions/types'
-import { combineReducers } from 'redux'
 
 const initialState = {
 	isLogin: false,

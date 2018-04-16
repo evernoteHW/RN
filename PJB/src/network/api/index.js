@@ -1,6 +1,6 @@
 // import * as gateway from './gateway'
 // import * as user from './user'
-// import * as activity from './activity'
+import * as activity from './activity'
 // import * as cash from './cash'
 import * as core from './core'
 // import * as message from './message'
@@ -17,7 +17,7 @@ const api = {
   STATUS_OK: STATUS_OK,
   // ...gateway,
   // ...user,
-  // ...activity,
+  ...activity,
   // ...cash,
   ...core,
   // ...message,
