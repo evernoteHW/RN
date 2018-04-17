@@ -1,31 +1,34 @@
-import * as TYPES from '../actions/types'
+import TYPES from '../types'
 
 const initialState = {
-	headerDic: {}
+	appLoginStatus: false
 }
 
 export const appLoginReducer = (state=initialState, action) =>{
 	switch (action.type) {
-		case TYPES.PJB_LOGIN_BEGGING:
+		case TYPES.GETEWAY.PJB_LOGIN_BEGGING:
 		{
-			return Object.assign({}, state)	
+			return Object.assign({}, {
+				...state,
+				appLoginStatus: false
+			})	
 		}
-		case TYPES.PJB_LOGIN_SUCCEED:
+		case TYPES.GETEWAY.PJB_LOGIN_SUCCEED:
 		{
 			return Object.assign({}, {
 				...state,
 				status: 'completed',
-				headerDic: action.response
+				appLoginStatus: true
 			})	
 		}
-		case TYPES.PJB_LOGIN_FAILED:
+		case TYPES.GETEWAY.PJB_LOGIN_FAILED:
 		{
 			return Object.assign({}, {
 				...state,
-				status: 'failed'
+				status: 'failed',
+				appLoginStatus: false
 			})	
 		}
-		default:
-			return state
+		default: return {...state}
 	}	
 };

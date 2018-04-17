@@ -1,4 +1,4 @@
-import * as TYPES from '../actions/types'
+import TYPES from '../types'
 
 const initialState = {
 	status: 'initial',
@@ -7,14 +7,14 @@ const initialState = {
 
 export const productListReducer = (state=initialState, action) =>{
 	switch (action.type) {
-		case TYPES.PJB_PRODUCT_LIST_BEGGING:
+		case TYPES.CORE.PJB_PRODUCT_LIST_BEGGING:
 		{
 			return {
 				...state,
 				status: 'begging'
 			}	
 		}
-		case TYPES.PJB_PRODUCT_LIST_SUCCEED:
+		case TYPES.CORE.PJB_PRODUCT_LIST_SUCCEED:
 		{
 			return {
 				...state,
@@ -22,7 +22,7 @@ export const productListReducer = (state=initialState, action) =>{
 				products: action.response
 			}	
 		}
-		case TYPES.PJB_PRODUCT_LIST_FAILED:
+		case TYPES.CORE.PJB_PRODUCT_LIST_FAILED:
 		{
 			return {
 				...state,
@@ -49,7 +49,7 @@ const appIndexPageInitialState = {
 
 export const appIndexPageReducer = (state=appIndexPageInitialState, action) =>{
 	switch (action.type) {
-		case TYPES.PJB_APP_INDEX_PAGE_BEGGING:
+		case TYPES.CORE.PJB_APP_INDEX_PAGE_BEGGING:
 		{
 			state =  Object.assign({}, {
 				...state,
@@ -57,7 +57,7 @@ export const appIndexPageReducer = (state=appIndexPageInitialState, action) =>{
 			})
 			return state
 		}
-		case TYPES.PJB_APP_INDEX_PAGE_SUCCEED:
+		case TYPES.CORE.PJB_APP_INDEX_PAGE_SUCCEED:
 		{
 			var appIndexPageData = {}
 			action.res.mapList.map((item, idx)=> {
@@ -97,7 +97,7 @@ export const appIndexPageReducer = (state=appIndexPageInitialState, action) =>{
 	      		appIndexPageData: appIndexPageData
 	      	}
 		}
-		case TYPES.PJB_APP_INDEX_PAGE_FAILED:
+		case TYPES.CORE.PJB_APP_INDEX_PAGE_FAILED:
 		{
 			return Object.assign({}, { ...state, status: 'failed' })		
 		}

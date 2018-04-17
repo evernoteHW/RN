@@ -37,11 +37,14 @@ class SignInScreen extends React.Component {
         password: 'pj123456',
         imageCode: ''
       };
-      // goBack
+      // 
     }
     _loginButton = ()=> {
       const { username, password, imageCode } = this.state
       this.props.appLoginAction(username, password, imageCode)
+    }
+    componentWillMount() {
+      console.log('componentWillMount');
     }
     componentDidMount() {
       const { bannerLoginPageOfBannerDetailOfAppAction } = this.props
@@ -52,9 +55,19 @@ class SignInScreen extends React.Component {
         telPhoneTopStyle: e.nativeEvent.layout.height - 360
       })
     }
+    _dismiss(){
+      alert('登录成功')
+      setTimeout(() => {
+         this.props.navigation.goBack(null)
+       }, 1000);
+    }
   	render() {
-      3const { headerDic } = this.props
+      const { headerDic, appLoginStatus } = this.props
       const { telPhoneTopStyle } = this.state
+      // 登录成功
+      if (appLoginStatus) {
+        this._dismiss()
+      }
     	return (
       		<ScrollView style={styles.scrollViewWrapper} onLayout={this._onLayout}>
             <View style={styles.advertWrapper}> 
@@ -117,7 +130,7 @@ class SignInScreen extends React.Component {
 
 const mapStateToProps = (state, props) => {
     return {
-        status: state.appLoginReducer.status,
+        appLoginStatus: state.appLoginReducer.appLoginStatus,
         headerDic: state.bannerLoginPageOfBannerDetailOfAppReducer.headerDic
     }
 }
