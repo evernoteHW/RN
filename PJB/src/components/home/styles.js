@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     height: 25,
   },
   contentContainer: {
+      backgroundColor: '#fff'
   },
   topBannerWrapper: {
     height: scare(375.0/2.0)

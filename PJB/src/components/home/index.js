@@ -20,6 +20,8 @@ import api from '../../network/api';
 import styles from './styles'
 import { scare, deviceWidth, max, min } from '../../uiutils/Dimensions'
 
+import GifPullRefreshView from '../../verder/GifPullRefreshView'
+
 const productIcon = require('../../resources/images/home/home_top_hot_recommond_icon.png')
 const headerLeftIcon = require('../../resources/images/home/home_left_item_white_icon.png')
 const headerRightIcon = require('../../resources/images/home/home_right_item_white_icon.png')
@@ -86,7 +88,7 @@ class HomeScreen extends React.Component {
     const { topBannerList, topTopics, monthReport, newComerActivity, announcement, speciallyRecommend } = this.props.appIndexPageData;
     
     return (
-      <ScrollView style = {styles.contentContainer} onScroll={this._onScroll} scrollEventThrottle={200}>
+      <GifPullRefreshView style = {styles.contentContainer} onScroll={this._onScroll} scrollEventThrottle={200}>
         {/*轮播图*/}
         {
           topBannerList.length > 0 
@@ -204,7 +206,7 @@ class HomeScreen extends React.Component {
           : null  
         }
         
-      </ScrollView>
+      </GifPullRefreshView>
     );
   }
 };

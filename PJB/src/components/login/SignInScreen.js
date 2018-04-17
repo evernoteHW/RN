@@ -7,7 +7,8 @@ import {
   StyleSheet,
   TextInput,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  RefreshControl
 } from 'react-native';
 
 // redux
@@ -78,7 +79,7 @@ class SignInScreen extends React.Component {
         this._dismiss()
       }
     	return (
-      		<ScrollView style={styles.scrollViewWrapper} onLayout={this._onLayout}>
+      		<ScrollView style={styles.scrollViewWrapper} onLayout={this._onLayout} refreshControl={<RefreshControl refreshing={true}/>}>
             <View style={styles.advertWrapper}> 
               <Image   style={styles.headerPic} source={{uri: headerDic.picaddr}}/>
             </View>
@@ -156,7 +157,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);
 
 const styles = StyleSheet.create({
   scrollViewWrapper: {
-    
+    // backgroundColor: 'orange',
   },
   advertWrapper: {
     // flex: 1,
