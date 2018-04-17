@@ -1,4 +1,4 @@
-// import * as gateway from './gateway'
+import * as gateway from './gateway'
 // import * as user from './user'
 import * as activity from './activity'
 // import * as cash from './cash'
@@ -15,7 +15,7 @@ export const STATUS_OK = '000'
 
 const api = {
   STATUS_OK: STATUS_OK,
-  // ...gateway,
+  ...gateway,
   // ...user,
   ...activity,
   // ...cash,

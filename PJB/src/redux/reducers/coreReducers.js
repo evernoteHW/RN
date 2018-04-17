@@ -33,3 +33,74 @@ export const productListReducer = (state=initialState, action) =>{
 			return state
 	}	
 };
+
+
+const appIndexPageInitialState = {
+	appIndexPageData: {
+		topBannerList: [],
+    	topTopics: [],
+    	monthReport: null,
+    	newComerActivity: null,
+    	announcement: null,
+    	speciallyRecommend: null
+	}
+
+}
+
+export const appIndexPageReducer = (state=appIndexPageInitialState, action) =>{
+	switch (action.type) {
+		case TYPES.PJB_APP_INDEX_PAGE_BEGGING:
+		{
+			state =  Object.assign({}, {
+				...state,
+				status: 'begging'
+			})
+			return state
+		}
+		case TYPES.PJB_APP_INDEX_PAGE_SUCCEED:
+		{
+			var appIndexPageData = {}
+			action.res.mapList.map((item, idx)=> {
+				switch(item.type) {
+				case 1 || '1':
+				{
+					appIndexPageData.topTopics = item.topTopics
+					break
+				}
+				case 2 || '2': 
+				{
+					appIndexPageData.monthReport = item.monthReport
+					break
+				}
+				case 3 || '3': 
+				{
+					appIndexPageData.newComerActivity = item.newComerActivity
+					break
+				}
+				case 4 || '4': 
+				{
+					appIndexPageData.announcement = item.announcement
+					break
+				}
+				case 5 || '5':
+				{
+					appIndexPageData.speciallyRecommend = item.speciallyRecommend
+					break
+				}
+					default: break
+				}
+			})
+	      	appIndexPageData.topBannerList = action.res.topBannerList
+		  	return { 
+		  		...state, 
+	      		status: 'completed',
+	      		appIndexPageData: appIndexPageData
+	      	}
+		}
+		case TYPES.PJB_APP_INDEX_PAGE_FAILED:
+		{
+			return Object.assign({}, { ...state, status: 'failed' })		
+		}
+		default: return state
+	}	
+};

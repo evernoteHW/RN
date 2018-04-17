@@ -13,7 +13,8 @@ import Swiper from 'react-native-swiper';
 // redux
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as loginActions from '../../redux/actions/loginActions'
+// import * as loginActions from '../../redux/actions/loginActions'
+import actions from '../../redux/actions'
 
 import api from '../../network/api';
 import styles from './styles'
@@ -44,79 +45,17 @@ class HomeScreen extends React.Component {
   };
   constructor(props) {
     super(props);
-    this.state = {
-      topBannerList: [],
-      topTopics: [],
-      monthReport: null,
-      newComerActivity: null,
-      announcement: null,
-      speciallyRecommend: null
-    };
   };
   componentWillMount() {
-    // console.log(navigation)
-    // this.props.navigation.navigate('Login')
   }
   componentDidMount () {
-    // this.props.navigation.goBack()
-    // console.log('1====', this.props)
-    this.appIndexPage()
-    // setTimeout(()=>{
-    //   // console.log('2====', this.props)
-    //   // dispatch({'type': TYPES.PJB_LOGIN_SUCCEED, data: data})
-    //   alert(333)
-    //   this.props.navigation.goBack()
-    // }, 4000);
-    // alert(fetchApi)
+    this.props.appIndexPageAction()
   }
   _changeHeaderColor = (alpha=0.0)=> {
     const rgba = 'rgba(233,77,78,' + alpha + ')'
     this.props.navigation.setParams({ headerColor: rgba });
   }
   appIndexPage() {
-    api.appIndexPage().then(res => {
-      var topTopics = []
-      var monthReport = null;
-      var newComerActivity = null
-      var announcement = null
-      var speciallyRecommend = null
-      res.mapList.map((item, idx)=> {
-        switch(item.type) {
-          case 1 || '1':
-          {
-            topTopics = item.topTopics
-          }
-          case 2 || '2': 
-          {
-            monthReport = item.monthReport
-          }
-          case 3 || '3': 
-          {
-            newComerActivity = item.newComerActivity
-          }
-          case 4 || '4': 
-          {
-            announcement = item.announcement
-          }
-          case 5 || '5':
-          {
-            speciallyRecommend = item.speciallyRecommend
-          }
-          default: break
-        }
-      })
-      this.setState({
-        topBannerList: res.topBannerList,
-        topTopics: topTopics,
-        monthReport: monthReport,
-        newComerActivity: newComerActivity,
-        announcement: announcement,
-        speciallyRecommend: speciallyRecommend
-      })
-      // console.log('count---',res)
-    }).catch (error => {
-      alert(error)
-    })
   }
   //
   _onScroll = (e) => {
@@ -144,7 +83,8 @@ class HomeScreen extends React.Component {
   }
   render() {
     // 解构赋值
-    const { topBannerList, topTopics, monthReport, newComerActivity, announcement, speciallyRecommend } = this.state;
+    const { topBannerList, topTopics, monthReport, newComerActivity, announcement, speciallyRecommend } = this.props.appIndexPageData;
+    
     return (
       <ScrollView style = {styles.contentContainer} onScroll={this._onScroll} scrollEventThrottle={200}>
         {/*轮播图*/}
@@ -271,14 +211,14 @@ class HomeScreen extends React.Component {
 
 function mapStateToProps(state, props) {
     return {
-        loading: state.appIndexPageReducer.loading,
-        data: state.appIndexPageReducer.data
+        appIndexPageData: state.appIndexPageReducer.appIndexPageData
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(loginActions, dispatch);
+    return bindActionCreators({
+      appIndexPageAction: actions.coreActions.appIndexPageAction
+    }, dispatch);
 }
 
-//Connect everything
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

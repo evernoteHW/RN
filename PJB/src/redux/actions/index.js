@@ -1,12 +1,12 @@
 
 import * as activityActions from './activityActions'
 import * as coreActions from './coreActions'
-import * as loginActions from './loginActions'
+import * as getewayActions from './getewayActions'
 
 const actions = {
     activityActions,
     coreActions,
-    loginActions
+    getewayActions
 };
 
 export default actions
