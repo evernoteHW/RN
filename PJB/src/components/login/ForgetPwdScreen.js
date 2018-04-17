@@ -18,25 +18,12 @@ import actions from '../../redux/actions'
 import CustomButton from '../commonComponents/customButton'
 import ImageCodeButton from '../commonComponents/ImageCodeButton'
 import { deviceHeight } from '../../uiutils/Dimensions'
-import commonStyles from '../../uiutils/commonStyles'
 
 const userNameIcon = require('../../resources/images/login/login_username_icon.png')
 const pwdIcon = require('../../resources/images/login/login_pwd_icon.png')
 const imageCodeIcon = require('../../resources/images/login/login_image_code_icon.png')
-const common_back_image = require('../../resources/images/common/common_back_img.png');
-
 
 class SignInScreen extends React.Component {
-    static navigationOptions = ({ navigation }) => {
-      const params = navigation.state.params || {};
-      return { 
-        headerLeft:(
-                    <TouchableOpacity style={commonStyles.headerLeftWrapper} onPress={params._dismiss}>
-                      <Image source={common_back_image}/>
-                    </TouchableOpacity>
-                  ),
-      };
-    };
     constructor(props) {
       super(props);
       
@@ -53,7 +40,6 @@ class SignInScreen extends React.Component {
       this.props.appLoginAction(username, password, imageCode)
     }
     componentWillMount() {
-      this.props.navigation.setParams({ _dismiss: this._dismiss });
     }
     componentDidMount() {
       const { bannerLoginPageOfBannerDetailOfAppAction } = this.props
@@ -64,14 +50,14 @@ class SignInScreen extends React.Component {
         telPhoneTopStyle: e.nativeEvent.layout.height - 360
       })
     }
-    _dismiss = ()=> {
+    _dismiss(){
       alert('登录成功')
       setTimeout(() => {
          this.props.navigation.goBack(null)
        }, 1000);
     }
   	render() {
-      const { headerDic, appLoginStatus, navigation } = this.props
+      const { headerDic, appLoginStatus } = this.props
       const { telPhoneTopStyle } = this.state
       // 登录成功
       if (appLoginStatus) {
@@ -122,10 +108,10 @@ class SignInScreen extends React.Component {
               onPress={this._loginButton}
             />
             <View style={styles.registerForgetPwdWrapper}>
-              <TouchableOpacity onPress={()=>navigation.navigate('ForgetPwdScreen')}>
+              <TouchableOpacity>
                 <Text style={styles.forgetPwd}>忘记密码</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={()=>navigation.navigate('RegisterScreen')}>
+              <TouchableOpacity>
                 <Text style={styles.register}>立即注册</Text>
               </TouchableOpacity>
             </View>

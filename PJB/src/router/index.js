@@ -1,31 +1,41 @@
 import React from 'react';
 import { 
-  TouchableOpacity 
+  TouchableOpacity,
+  Image
 } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import { Text, View } from 'react-native';
 import TabBarScreen from '../components/tabbar/TabBarScreen'
 import SignInScreen from '../components/login/SignInScreen'
 import AuthLoadingScreen from '../components/login/AuthLoadingScreen'
+import ForgetPwdScreen from '../components/login/ForgetPwdScreen'
+import RegisterScreen from '../components/login/RegisterScreen'
+
 // import 
+const common_back_image = require('../resources/images/common/common_back_img.png');
+const common_login_logo = require('../resources/images/common/common_login_logo.png');
 
 const SignInNavigationStack = StackNavigator(
   { 
     Root: { screen: SignInScreen,},
-    AuthLoadingScreen: { screen: AuthLoadingScreen,},
+    AuthLoadingScreen: { 
+      screen: AuthLoadingScreen,
+    },
+    ForgetPwdScreen: {
+      screen: ForgetPwdScreen
+    },
+    RegisterScreen: {
+      screen: RegisterScreen,
+    }
   },
   {
     navigationOptions: ({ navigation }) => ({
-      // headerLeft:(
-      //     <TouchableOpacity style={styles.headerLeftWrapper} onPress={()=>navigation.goBack(null)}>
-      //       <Image style={styles.headerLeftIcon} source={headerLeftIcon} overflow='visible'/>
-      //     </TouchableOpacity>
-      //   ),
+      headerTitle: (<Image source={common_login_logo}/>),
       headerBackTitle: '',
       headerTintColor: 'white',
       headerStyle: {backgroundColor: '#e94d4e', borderBottomWidth: 0},
-      statusBarStyle: 'light-content'
-      // headerBackImage: (require('../resources/images/home/home_left_item_white_icon.png'))
+      statusBarStyle: 'light-content',
+      headerBackImage: (common_back_image)
     })
   }
 );

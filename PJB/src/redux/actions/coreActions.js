@@ -5,12 +5,11 @@ import api from '../../network/api'
 export const productListAction = (params) => {
 	return dispatch => {
 			dispatch({type: TYPES.CORE.PJB_PRODUCT_LIST_BEGGING})
-		 	api.productList(params).then(response => {
-      			dispatch({type: TYPES.CORE.PJB_PRODUCT_LIST_SUCCEED, response: response})
-    		}).catch (error => {
-      			dispatch({type: TYPES.CORE.PJB_PRODUCT_LIST_FAILED})
-    		})
-    	}
+		 	api
+      .productList(params)
+      .then(response => dispatch({type: TYPES.CORE.PJB_PRODUCT_LIST_SUCCEED, response: response}))
+      .catch (error => dispatch({type: TYPES.CORE.PJB_PRODUCT_LIST_FAILED}))
+  } 
 }
 
 export const appIndexPageAction = () => {
