@@ -359,6 +359,7 @@ export default class GifPullRefreshView extends Component {
 
     setNativeProps(props) {
       this.scrollView.setNativeProps(props);
+      
     }
     fixSticky() {
       let stickyHeaderIndices = [];
